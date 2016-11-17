@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Goslings - Git Repository Visualizer">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="goslings.css">
+    <link rel="stylesheet" href="material.teal-lime.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="dialog-polyfill.css" />
+    <link rel="stylesheet" href="vis.min.css" />
+    <title>Goslings</title>
+  </head>
+  <body>
+    <div id="goslings-container">
+      <div id="goslings-title" class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell goslings-center-cell">
+          <img class="goslings-form-title" src="goslings-logotype.png" />
+        </div>
+      </div>
+      <div id="goslings-uri-form" class="mdl-grid mdl-grid--no-spacing" style="visibility: hidden">
+        <div class="mdl-cell mdl-cell--middle goslings-center-cell">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input id="goslings-uri" class="mdl-textfield__input" type="text">
+            <label class="mdl-textfield__label" for="goslings-uri">URI of Git Repository</label>
+          </div>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+            Browse
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="goslings-progress-bar" class="mdl-progress mdl-js-progress goslings-progress"></div>
+
+    <dialog id="goslings-error-dialog" class="mdl-dialog">
+      <div class="mdl-dialog__content">
+        <h5>ERROR</h5>
+        <p></p>
+      </div>
+      <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button mdl-js-button mdl-button--primary" close>OK</button>
+      </div>
+    </dialog>
+
+    <dialog id="goslings-contents-dialog" class="mdl-dialog goslings-contents-dialog">
+      <div class="mdl-dialog__content"><pre></pre></div>
+      <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button mdl-js-button mdl-button--primary" data-clipboard-target="#goslings-contents-dialog .mdl-dialog__content">Copy</button>
+        <button type="button" class="mdl-button mdl-js-button mdl-button--primary" close>Close</button>
+      </div>
+    </dialog>
+
+    <script defer src="goslings-client.js"></script>
+  </body>
+</html>
