@@ -10,7 +10,7 @@
   "author": "Kaito Yamada",
   "license": "MIT",
   "scripts": {
-    "copyResources": "copyfiles -f src/index.html src/goslings.ico src/goslings-logotype.png src/css/* node_modules/material-design-lite/dist/material.teal-lime.min.css node_modules/material-design-lite/material.min.js node_modules/dialog-polyfill/dialog-polyfill.css node_modules/vis/dist/vis.min.css dist",
+    "copyResources": "copyfiles -f src/index.html src/goslings-logotype.png src/css/* node_modules/material-design-lite/dist/material.teal-lime.min.css node_modules/material-design-lite/material.min.js node_modules/dialog-polyfill/dialog-polyfill.css node_modules/vis/dist/vis.min.css dist",
     "devBuild": "yarn run copyResources && webpack -d --bail",
     "build": "yarn run copyResources && webpack -p --bail"
   },
