@@ -1,55 +1,59 @@
 const webpack = require('webpack');
 const pjson = require('./package.json');
+const path = require('path');
 
 const thisYear = new Date().getFullYear();
 const copyright
   = thisYear === 2016 ?
       'Copyright (C) 2016 Kaito Yamada' :
       `Copyright (C) 2016 - ${thisYear} Kaito Yamada`;
+const banner =
+`goslings-client.js ${pjson.version}
+https://github.com/kaitoy/goslings-client
+MIT licensed
+
+${copyright}`;
 
 module.exports = {
-  entry: './src/js/index.js',
+  entry: ['babel-polyfill', './src/js/index.js'],
   output: {
     filename: 'goslings-client.js',
-    path: './dist',
+    path: path.join(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.js'],
+    extensions: ['.webpack.js', '.web.js', '.js'],
+    modules: [
+      path.join(__dirname, 'src'),
+      'node_modules',
+    ],
   },
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.js$/,
+        enforce: 'pre',
         exclude: /node_modules/,
-        loader: 'eslint',
+        loader: 'eslint-loader',
+        options: {
+          configFile: './.eslintrc',
+          failOnError: true,
+        },
       },
-    ],
-    loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015'],
-          plugins: ['syntax-async-functions', 'transform-regenerator'],
+        loader: 'babel-loader',
+        options: {
+          presets: ['env'],
         },
       },
     ],
   },
-  eslint: {
-    configFile: './.eslintrc',
-    failOnError: true,
-  },
   plugins: [
-    new webpack.BannerPlugin(
-      'goslings-client.js ' + pjson.version + '\n' +
-      'https://github.com/kaitoy/goslings-client\n' +
-      'MIT licensed\n\n' +
-      copyright,
-      {
-        raw: false,
-        entryOnly: true,
-      }
-    ),
+    new webpack.BannerPlugin({
+      banner,
+      raw: false,
+      entryOnly: true,
+    }),
   ],
 };

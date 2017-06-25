@@ -3,10 +3,9 @@
  * https://github.com/kaitoy/goslings-client.js
  * MIT licensed
  *
- * Copyright (C) 2016 Kaito Yamada
+ * Copyright (C) 2016-2017 Kaito Yamada
  */
 
-import 'babel-polyfill';
 import 'material-design-lite';
 import url from 'url';
 import progressBar from './progress-bar';
